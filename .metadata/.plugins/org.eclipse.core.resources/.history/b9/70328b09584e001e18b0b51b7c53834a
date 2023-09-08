@@ -1,0 +1,75 @@
+package windows;
+
+import javax.swing.JFrame;
+
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JButton;
+import javax.swing.SwingConstants;
+import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+public class MainMenu extends JFrame {
+
+	static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+
+	public static void main(String[] args) {
+		try {
+			MainMenu frame = new MainMenu();
+			frame.setVisible(true);
+			frame.setLocationRelativeTo(null);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public MainMenu() {
+		setTitle("Main Menu");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 188);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
+		
+		JPanel panel = new JPanel();
+		contentPane.add(panel);
+		panel.setLayout(new GridLayout(0, 1, 10, 20));
+		
+		JButton btnSimulator = new JButton("Start Simulator");
+		btnSimulator.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				CircuitBuilder newWindow = new CircuitBuilder();
+				newWindow.setVisible(true);
+				newWindow.setLocationRelativeTo(null);
+			}
+		});
+		btnSimulator.setVerticalAlignment(SwingConstants.TOP);
+		panel.add(btnSimulator);
+		
+		JButton btnExit = new JButton("Exit");
+		btnExit.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.exit(ABORT);
+			}
+		});
+		
+		JButton btnOptions = new JButton("Options");
+		btnOptions.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Options newWindow = new Options();
+				newWindow.setVisible(true);
+				newWindow.setLocationRelativeTo(null);
+			}
+		});
+		panel.add(btnOptions);
+		btnExit.setVerticalAlignment(SwingConstants.BOTTOM);
+		panel.add(btnExit);
+	}
+
+}
